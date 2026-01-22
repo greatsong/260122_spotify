@@ -127,8 +127,13 @@ st.markdown("""
 @st.cache_data
 def load_data():
     """데이터 로드 및 전처리"""
-    df1 = pd.read_csv('track_data_final.csv')
-    df2 = pd.read_csv('spotify_data_clean.csv')
+    import os
+    
+    # 스크립트 파일 위치 기준 경로 설정
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    df1 = pd.read_csv(os.path.join(script_dir, 'track_data_final.csv'))
+    df2 = pd.read_csv(os.path.join(script_dir, 'spotify_data_clean.csv'))
     
     # 곡 길이 통일 (분 단위)
     df1['duration_min'] = df1['track_duration_ms'] / 60000
@@ -497,4 +502,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
